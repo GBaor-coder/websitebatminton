@@ -701,8 +701,12 @@ ul {
 /* Sticky Sidebar */
 .products-sidebar .sticky-top {
     position: sticky;
-    top: 120px;
-    z-index: 102;
+    top: 250px;
+    z-index: 1;
+}
+
+.products-sidebar {
+    margin-top: 30px;
 }
 @media (max-width: 991px) {
     .products-sidebar .sticky-top {
