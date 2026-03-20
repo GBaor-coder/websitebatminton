@@ -35,25 +35,11 @@ ul {
     padding: 0;
 }
 
-/* Logo */
-.logo {
-    text-decoration: none;
-}
-
-.logo-text {
-    font-size: 28px;
-    font-weight: 800;
-    color: var(--main-color);
-    letter-spacing: 1px;
-}
-
-
-
 /* Search Box */
 .search-box {
     position: relative;
     width: 100%;
-    max-width: 500px;
+    max-width: 400px;
 }
 
 .search-box input {
@@ -103,8 +89,8 @@ ul {
 .hotline {
     display: flex;
     align-items: center;
-    gap: 5px;
-    font-size: 14px;
+    gap: 10px;
+    font-size: 25px;
     color: var(--gray-dark);
 }
 
@@ -119,8 +105,26 @@ ul {
 /* Action Icons */
 .action-icons {
     display: flex;
+    gap: 15px;
+}
+
+.action-item {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 10px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.action-label {
+    font-size: 0.7rem;
+    white-space: nowrap;
+}
+
+@media (max-width: 991px) {
+    .action-label {
+        font-size: 0.65rem;
+    }
 }
 
 .action-icon {
@@ -435,6 +439,10 @@ ul {
 
 /* Responsive */
 @media (max-width: 991px) {
+    .logo-img-fluid {
+        height: 32px;
+    }
+    
     .header-actions {
         gap: 10px;
     }

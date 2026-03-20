@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $pageTitle ?? 'JP SPORT - Cầu lông Chính hãng'; ?></title>
     <meta name="description" content="Shop cầu lông chính hãng Yonex, Victor, Lining - Vợt cầu lông, giày cầu lông, phụ kiện cầu lông">
-    
+    <link rel="shortcut icon" href="assets\images\favicon\JPfavicon.png" type="image/x-icon">
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
@@ -24,14 +24,14 @@
         <div class="container">
             <div class="row align-items-center">
                 <!-- Logo -->
-                <div class="col-lg-3 col-md-3 col-6">
+                <div class="col-lg-2 col-md-3 col-6">
                     <a href="/websitebatminton/" class="logo">
-                        <span class="logo-text">JP SPORT</span>
+                        <img src="assets\images\logo\JPTachnen.png" alt="JP SPORT Logo" class="logo-jptachnenpng img-fluid w-75">
                     </a>
                 </div>
                 
                 <!-- Search Bar -->
-                <div class="col-lg-6 col-md-6 d-none d-md-block">
+                <div class="col-lg-5 col-md-5">
                     <form action="/websitebatminton/products" method="GET" class="search-box">
                         <input type="text" name="search" placeholder="Tìm kiếm sản phẩm...">
                         <button type="submit">
@@ -41,25 +41,37 @@
                 </div>
                 
                 <!-- Right Side -->
-                <div class="col-lg-3 col-md-3 col-6">
-                    <div class="header-actions">
+                <div class="col-lg-5 col-md-4 col-6">
+                    <div class="header-actions d-flex align-items-center justify-content-end h100">
                         <!-- Hotline -->
-                        <div class="hotline d-none d-lg-block">
-                            <i class="bi bi-telephone"></i>
-                            <span>0342826430</span>
+                        <div class="hotline d-none d-lg-flex align-items-center me-4">
+                            <i class="bi bi-telephone me-2 text-primary fs-5"></i>
+                            <span class="text-uppercase fw-bold me-1 text-dark" style="font-size: 0.9rem;">Hotline:</span>
+                            <div class="hotline-numbers fw-bold custom-blue-text">
+                            <span class="fw-bold">0342826430 | 0961624535</span>
+                            </div>
                         </div>
                         
                         <!-- Action Icons -->
-                        <div class="action-icons">
-                            <a href="/websitebatminton/products" class="action-icon" title="Tra cứu">
-                                <i class="bi bi-search"></i>
+                        <div class="action-icons d-flex gap-3">
+                            <a href="/websitebatminton/products" class="action-item d-flex flex-column align-items-center text-decoration-none" title="Tra cứu">
+                                <div class="action-icon rounded-circle border p-2 d-flex align-items-center justify-content-center mb-1">
+                                    <i class="bi bi-search"></i>
+                                </div>
+                                <small class="action-label fw-medium text-muted small-text text-nowrap">Tra cứu</small>
                             </a>
-                            <a href="/websitebatminton/login" class="action-icon" title="Tài khoản">
-                                <i class="bi bi-person"></i>
+                            <a href="/websitebatminton/login" class="action-item d-flex flex-column align-items-center text-decoration-none" title="Tài khoản">
+                                <div class="action-icon rounded-circle border p-2 d-flex align-items-center justify-content-center mb-1">
+                                    <i class="bi bi-person"></i>
+                                </div>
+                                <small class="action-label fw-medium text-muted small-text text-nowrap">Tài khoản</small>
                             </a>
-                            <a href="/websitebatminton/cart" class="action-icon" title="Giỏ hàng">
-                                <i class="bi bi-cart3"></i>
-                                <span class="cart-count">0</span>
+                            <a href="/websitebatminton/cart" class="action-item d-flex flex-column align-items-center text-decoration-none position-relative" title="Giỏ hàng">
+                                <div class="action-icon rounded-circle border p-2 d-flex align-items-center justify-content-center mb-1">
+                                    <i class="bi bi-cart3"></i>
+                                </div>
+                                <small class="action-label fw-medium text-muted small-text text-nowrap">Giỏ hàng</small>
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;">0</span>
                             </a>
                         </div>
                     </div>

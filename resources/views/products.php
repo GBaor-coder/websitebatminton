@@ -22,7 +22,7 @@
                             </li>
                             <?php foreach ($categories as $category): ?>
                             <li class="list-group-item">
-                                <a href="?category=<?= $category['id']; ?><?php if(isset($search) && $search) echo '&search=' . urlencode($search); ?>&page=1" 
+                               <a href="?category=<?= $category['id']; ?><?php if(isset($search) && $search) echo '&search=' . urlencode($search); ?>&page=1" 
                                    class="d-flex justify-content-between align-items-center text-decoration-none 
                                    <?php if (isset($categoryId) && $categoryId == $category['id']) echo 'fw-bold text-primary'; ?>">
                                     <span><?= htmlspecialchars($category['name']); ?></span>
