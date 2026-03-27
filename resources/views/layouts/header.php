@@ -13,7 +13,8 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/websitebatminton/assets/css/style.css">
+    <link rel="stylesheet" href="assets\css\style.css">
+    <link rel="stylesheet" href="assets\css\products.css">
 </head>
 <body>
 
@@ -25,7 +26,7 @@
             <div class="row align-items-center">
                 <!-- Logo -->
                 <div class="col-lg-2 col-md-3 col-6">
-                    <a href="/websitebatminton/" class="logo">
+                    <a href="/websitebatminton/" class="jp-logo">
                         <img src="assets\images\logo\JPTachnen.png" alt="JP SPORT Logo" class="logo-jptachnenpng img-fluid w-75">
                     </a>
                 </div>
@@ -42,11 +43,11 @@
                 
                 <!-- Right Side -->
                 <div class="col-lg-5 col-md-4 col-6">
-                    <div class="header-actions d-flex align-items-center justify-content-end h100">
+                    <div class="header-actions d-flex align-items-center justify-content-end h-100">
                         <!-- Hotline -->
                         <div class="hotline d-none d-lg-flex align-items-center me-4">
                             <i class="bi bi-telephone me-2 text-primary fs-5"></i>
-                            <span class="text-uppercase fw-bold me-1 text-dark" style="font-size: 0.9rem;">Hotline:</span>
+                            <span class="text-uppercase fw-bold me-1 text-dark">Hotline:</span>
                             <div class="hotline-numbers fw-bold custom-blue-text">
                             <span class="fw-bold">0342826430 | 0961624535</span>
                             </div>
