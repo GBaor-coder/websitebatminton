@@ -8,9 +8,11 @@
             <input type="text" class="form-control" placeholder="Tìm sản phẩm...">
         </div>
 
-        <div class="d-flex gap-3">
+        <div class="d-flex gap-3 align-items-center">
             <span>Hotline: <b>0342826430</b></span>
-            <span>🛒 Giỏ hàng</span>
+            <a href="/websitebatminton/cart" class="text-decoration-none text-dark">
+                🛒 Giỏ hàng
+            </a>
         </div>
     </div>
 

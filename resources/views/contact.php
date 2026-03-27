@@ -14,6 +14,10 @@
         <!-- Contact Info -->
         <div class="col-lg-4">
             <div class="contact-info-card shadow-lg p-5 rounded-4 h-100">
+                <div class="text-center mb-4">
+                    <img src="/websitebatminton/assets/images/contact-avatar.png" alt="JP Sport" style="width: 96px; height: 96px; border-radius: 16px; object-fit: cover; border: 2px solid #0d6efd; box-shadow: 0 8px 20px rgba(0,0,0,0.1);" />
+                    <p class="mt-3 mb-0 fw-semibold">JP SPORT - Hỗ trợ khách hàng</p>
+                </div>
                 <h3 class="text-primary mb-4">Thông tin liên hệ</h3>
                 
                 <!-- Address -->
@@ -47,9 +51,9 @@
                 </div>
 
                 <!-- Social -->
-                <div class="contact-social mt-4">
+                <div class="contact-social mt-4 text-center">
                     <h6 class="text-muted mb-3">Theo dõi chúng tôi</h6>
-                    <div class="d-flex gap-3">
+                    <div class="d-flex justify-content-center gap-3">
                         <a href="#" class="social-btn fs-4 text-primary hover-grow"><i class="bi bi-facebook"></i></a>
                         <a href="#" class="social-btn fs-4 text-danger hover-grow"><i class="bi bi-instagram"></i></a>
                         <a href="#" class="social-btn fs-4 text-info hover-grow"><i class="bi bi-youtube"></i></a>

@@ -8,15 +8,20 @@ class Controller {
     protected $db;
     protected $data = [];
     protected $model;
+    protected $params = [];
     
     public function __construct($params = []) {
         $this->db = Database::getInstance();
         $this->data = [];
+        $this->params = $params;
     }
     
     /**
-     * Load model
+     * Get route parameter
      */
+    protected function getParam($key, $default = null) {
+        return $this->params[$key] ?? $default;
+    }
     public function model($model) {
         $modelFile = "../app/Models/" . $model . ".php";
         
@@ -102,6 +107,19 @@ class Controller {
      */
     public function isGet() {
         return $_SERVER['REQUEST_METHOD'] === 'GET';
+    }
+    
+    /**
+     * Validate CSRF token
+     */
+    protected function validateCsrf() {
+        $token = $_POST['csrf_token'] ?? '';
+        
+        if (!CSRF::validate($token)) {
+            return false;
+        }
+        
+        return true;
     }
 }
 

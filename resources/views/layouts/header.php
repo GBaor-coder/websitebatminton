@@ -61,6 +61,7 @@
                                 </div>
                                 <small class="action-label fw-medium text-muted small-text text-nowrap">Tra cứu</small>
                             </a>
+
                             <a href="/websitebatminton/login" class="action-item d-flex flex-column align-items-center text-decoration-none" title="Tài khoản">
                                 <div class="action-icon rounded-circle border p-2 d-flex align-items-center justify-content-center mb-1">
                                     <i class="bi bi-person"></i>
@@ -73,6 +74,32 @@
                                 </div>
                                 <small class="action-label fw-medium text-muted small-text text-nowrap">Giỏ hàng</small>
                                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.6rem;">0</span>
+                            <?php $session = new \Session(); ?>
+                            <?php if ($session->isLoggedIn()): ?>
+                                <div class="dropdown d-inline-block">
+                                    <a href="#" class="action-icon text-dark" data-bs-toggle="dropdown" aria-expanded="false" title="Tài khoản">
+                                        <i class="bi bi-person-circle"></i>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li><a class="dropdown-item" href="/websitebatminton/profile">Thông tin cá nhân</a></li>
+                                        <li><a class="dropdown-item" href="/websitebatminton/logout">Đăng xuất</a></li>
+                                    </ul>
+                                </div>
+                            <?php else: ?>
+                                <div class="dropdown d-inline-block">
+                                    <a href="#" class="action-icon text-dark" data-bs-toggle="dropdown" aria-expanded="false" title="Tài khoản">
+                                        <i class="bi bi-person-circle"></i>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li><a class="dropdown-item" href="/websitebatminton/login">Đăng nhập</a></li>
+                                        <li><a class="dropdown-item" href="/websitebatminton/register">Đăng ký</a></li>
+                                    </ul>
+                                </div>
+                            <?php endif; ?>
+                            <a href="/websitebatminton/cart" class="action-icon" title="Giỏ hàng">
+                                <i class="bi bi-cart3"></i>
+                                <span class="cart-count"><?= cartItemCount() ?></span>
+
                             </a>
                         </div>
                     </div>

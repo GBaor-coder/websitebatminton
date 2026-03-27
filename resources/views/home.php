@@ -569,6 +569,7 @@ require_once ROOT_PATH . '/resources/views/layouts/header.php';
     margin-bottom: 12px;
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     min-height: 42px;
@@ -820,6 +821,7 @@ require_once ROOT_PATH . '/resources/views/layouts/header.php';
     margin-bottom: 12px;
     display: -webkit-box;
     -webkit-line-clamp: 2;
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
@@ -830,6 +832,7 @@ require_once ROOT_PATH . '/resources/views/layouts/header.php';
     margin-bottom: 15px;
     display: -webkit-box;
     -webkit-line-clamp: 3;
+    line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }

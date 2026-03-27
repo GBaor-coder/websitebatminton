@@ -1,8 +1,11 @@
-# Fix Contact Success Page Layout
-✅ **COMPLETE** - Layout fixed, CSS loaded, fully functional.
+# TODO: Add Shipping Addresses Page
 
-**Summary**:
-- Added header/navbar/footer layout to success.php
-- Hero + breadcrumb + success content + CTAs
-- Tested & working at http://localhost/websitebatminton/contact/success
+## Plan Steps:
+- [x] User confirmed plan
+- [ ] Create TODO.md
+- [x] Add addresses() method to HomeController.php
+- [x] Create resources/views/profile-addresses.php view
+- [x] Update sidebar links in profile.php and my-orders.php
+- [x] Test /profile/addresses functionality
 
+**Next:** Add controller method

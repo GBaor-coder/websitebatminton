@@ -81,9 +81,23 @@ $router->get('guide', ['controller' => 'Home', 'action' => 'guide']);
 $router->get('cart', ['controller' => 'Home', 'action' => 'cart']);
 $router->get('checkout', ['controller' => 'Home', 'action' => 'checkout']);
 
-// Auth
-$router->get('login', ['controller' => 'Auth', 'action' => 'login']);
-$router->get('register', ['controller' => 'Auth', 'action' => 'register']);
+// API endpoints
+$router->post('api/create-order', ['controller' => 'Home', 'action' => 'createOrder']);
+$router->post('api/clear-cart', ['controller' => 'Home', 'action' => 'clearCart']);
+
+// Profile
+$router->get('profile', ['controller' => 'Home', 'action' => 'profile']);
+$router->post('profile/update', ['controller' => 'Home', 'action' => 'profileUpdate']);
+$router->get('my-orders', ['controller' => 'Home', 'action' => 'myOrders']);
+$router->get('order/{id}', ['controller' => 'Home', 'action' => 'orderDetail']);
+$router->get('verify-email', ['controller' => 'Home', 'action' => 'verifyEmail']);
+
+// Auth (frontend user)
+$router->get('login', ['controller' => 'Home', 'action' => 'login']);
+$router->post('login', ['controller' => 'Home', 'action' => 'loginSubmit']);
+$router->get('register', ['controller' => 'Home', 'action' => 'register']);
+$router->post('register', ['controller' => 'Home', 'action' => 'registerSubmit']);
+$router->get('logout', ['controller' => 'Home', 'action' => 'logout']);
 
 // Admin routes
 $router->get('admin/login', ['controller' => 'Auth', 'action' => 'login']);

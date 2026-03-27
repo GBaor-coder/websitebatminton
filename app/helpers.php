@@ -162,3 +162,92 @@ function currentUser() {
     return $_SESSION['user'] ?? null;
 }
 
+/**
+ * Cart Helpers
+ */
+
+/**
+ * Get cart items from session
+ */
+function getCart() {
+    return $_SESSION['cart'] ?? [];
+}
+
+/**
+ * Get cart item count
+ */
+function cartItemCount() {
+    $cart = getCart();
+    return array_sum(array_column($cart, 'quantity'));
+}
+
+/**
+ * Add item to cart
+ */
+function addToCart($productId, $quantity = 1, $productData = []) {
+    $cart = getCart();
+    
+    if (isset($cart[$productId])) {
+        $cart[$productId]['quantity'] += $quantity;
+    } else {
+        $cart[$productId] = [
+            'id' => $productId,
+            'name' => $productData['name'] ?? '',
+            'price' => $productData['price'] ?? 0,
+            'sale_price' => $productData['sale_price'] ?? null,
+            'image' => $productData['image'] ?? '',
+            'quantity' => $quantity
+        ];
+    }
+    
+    $_SESSION['cart'] = $cart;
+    return $cart[$productId];
+}
+
+/**
+ * Update cart item quantity
+ */
+function updateCartItem($productId, $quantity) {
+    $cart = getCart();
+    
+    if ($quantity <= 0) {
+        unset($cart[$productId]);
+    } else {
+        $cart[$productId]['quantity'] = (int)$quantity;
+    }
+    
+    $_SESSION['cart'] = $cart;
+}
+
+/**
+ * Remove item from cart
+ */
+function removeFromCart($productId) {
+    $cart = getCart();
+    unset($cart[$productId]);
+    $_SESSION['cart'] = $cart;
+}
+
+/**
+ * Clear entire cart
+ */
+function clearCart() {
+    unset($_SESSION['cart']);
+}
+
+/**
+ * Get cart total price
+ */
+function cartTotal() {
+    $cart = getCart();
+    $total = 0;
+    
+    foreach ($cart as $item) {
+        $price = $item['sale_price'] ?? $item['price'];
+        $total += $price * $item['quantity'];
+    }
+    
+    return $total;
+}
+
+

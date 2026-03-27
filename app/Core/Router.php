@@ -5,13 +5,13 @@
  */
 
 class Router {
-    protected $routes = [];
+    protected $routes = ['GET' => [], 'POST' => []];
     protected $params = [];
     
     /**
      * Add a route
      */
-    public function add($route, $params = []) {
+    public function add($route, $params = [], $method = 'GET') {
         // Convert route to regex
         if ($route !== '' && $route !== '/') {
             $route = preg_replace('/\//', '\\/', $route);
@@ -22,22 +22,26 @@ class Router {
             // Root path - match both empty string and /
             $route = '/^(\/?)$/i';
         }
-        
-        $this->routes[$route] = $params;
+
+        $method = strtoupper($method);
+        if (!isset($this->routes[$method])) {
+            $this->routes[$method] = [];
+        }
+        $this->routes[$method][$route] = $params;
     }
     
     /**
      * Add GET route
      */
     public function get($route, $params = []) {
-        $this->add($route, $params);
+        $this->add($route, $params, 'GET');
     }
     
     /**
      * Add POST route
      */
     public function post($route, $params = []) {
-        $this->add($route, $params);
+        $this->add($route, $params, 'POST');
     }
     
     /**
@@ -50,8 +54,10 @@ class Router {
         if ($url === '') {
             $url = '/';
         }
-        
-        if ($this->match($url)) {
+
+        $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
+
+        if ($this->match($url, $method)) {
             $controller = $this->params['controller'];
             $controller = $this->convertToStudlyCaps($controller);
             $controller = "{$controller}Controller";
@@ -82,8 +88,13 @@ class Router {
     /**
      * Match URL to route
      */
-    protected function match($url) {
-        foreach ($this->routes as $route => $params) {
+    protected function match($url, $method = 'GET') {
+        $method = strtoupper($method);
+        if (!isset($this->routes[$method])) {
+            return false;
+        }
+
+        foreach ($this->routes[$method] as $route => $params) {
             if (preg_match($route, $url, $matches)) {
                 foreach ($matches as $key => $match) {
                     if (is_string($key)) {
@@ -94,6 +105,7 @@ class Router {
                 return true;
             }
         }
+
         return false;
     }
     

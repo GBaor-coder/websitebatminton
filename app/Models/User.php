@@ -9,7 +9,7 @@ require_once __DIR__ . '/Model.php';
 class User extends Model {
     protected $table = 'users';
     protected $primaryKey = 'id';
-    protected $fillable = ['name', 'email', 'password', 'role', 'phone', 'address', 'status'];
+    protected $fillable = ['name', 'email', 'password', 'role', 'phone', 'address', 'status', 'email_verified_at'];
     
     /**
      * Find user by email
