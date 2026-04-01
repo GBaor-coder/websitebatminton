@@ -389,20 +389,7 @@ require_once ROOT_PATH . '/resources/views/layouts/header.php';
     border-radius: 12px;
     transition: all 0.3s;
     cursor: pointer;
-}
-
-.policy-box:hover {
-    background: var(--main-color);
-    border-color: var(--main-color);
-    transform: translateY(-3px);
-}
-
-.policy-box:hover .policy-icon,
-.policy-box:hover .policy-content h4,
-.policy-box:hover .policy-content p {
-    color: white;
-}
-
+}   
 .policy-icon {
     flex-shrink: 0;
     width: 50px;
