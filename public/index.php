@@ -79,7 +79,11 @@ $router->get('guide', ['controller' => 'Home', 'action' => 'guide']);
 
 // Cart & Checkout
 $router->get('cart', ['controller' => 'Home', 'action' => 'cart']);
+$router->get('cart/add', ['controller' => 'Home', 'action' => 'addToCart']);
+$router->post('cart/update', ['controller' => 'Home', 'action' => 'updateCart']);
+$router->post('cart/remove', ['controller' => 'Home', 'action' => 'removeCart']);
 $router->get('checkout', ['controller' => 'Home', 'action' => 'checkout']);
+$router->get('product', ['controller' => 'Home', 'action' => 'productDetail']);
 
 // API endpoints
 $router->post('api/create-order', ['controller' => 'Home', 'action' => 'createOrder']);
@@ -87,6 +91,7 @@ $router->post('api/clear-cart', ['controller' => 'Home', 'action' => 'clearCart'
 
 // Profile
 $router->get('profile', ['controller' => 'Home', 'action' => 'profile']);
+$router->get('thanh-vien', ['controller' => 'Home', 'action' => 'profile']);
 $router->post('profile/update', ['controller' => 'Home', 'action' => 'profileUpdate']);
 $router->get('my-orders', ['controller' => 'Home', 'action' => 'myOrders']);
 $router->get('order/{id}', ['controller' => 'Home', 'action' => 'orderDetail']);
@@ -105,7 +110,7 @@ $router->post('admin/login/authenticate', ['controller' => 'Auth', 'action' => '
 $router->get('admin/logout', ['controller' => 'Auth', 'action' => 'logout']);
 
 $router->get('admin/dashboard', ['controller' => 'Dashboard', 'action' => 'index']);
-$router->get('admin', ['controller' => 'Dashboard', 'action' => 'index']);
+$router->get('admin', ['controller' => 'Dashboard', 'action' => 'profile']);
 
 $router->get('admin/products', ['controller' => 'Product', 'action' => 'index']);
 $router->get('admin/products/create', ['controller' => 'Product', 'action' => 'create']);

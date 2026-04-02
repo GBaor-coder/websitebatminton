@@ -40,39 +40,57 @@ ul {
     position: relative;
     width: 100%;
     max-width: 400px;
+    min-height: 46px;
 }
 
 .search-box input {
     width: 100%;
-    padding: 12px 50px 12px 20px;
+    height: 46px;
+    padding: 0 52px 0 16px;
     border: 2px solid var(--main-color);
     border-radius: 25px;
     font-size: 14px;
     outline: none;
-    transition: all 0.3s;
+    transition: none !important;
+    box-shadow: none !important;
+    line-height: 1.2;
+    vertical-align: middle;
+    box-sizing: border-box;
 }
 
 .search-box input:focus {
-    box-shadow: 0 0 0 3px rgba(28, 66, 243, 0.15);
+    box-shadow: none !important;
+    border-color: var(--main-color) !important;
 }
 
 .search-box button {
     position: absolute;
-    right: 5px;
+    right: 6px;
     top: 50%;
     transform: translateY(-50%);
     background: var(--main-color);
     border: none;
     border-radius: 50%;
-    width: 36px;
-    height: 36px;
+    width: 38px;
+    height: 38px;
     color: var(--white);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background 0.3s;
+    transition: none !important;
+    box-shadow: none !important;
+    padding: 0;
 }
+
+.search-box button:hover,
+.search-box button:focus {
+    background: var(--main-color) !important;
+    transform: translateY(-50%) !important;
+    box-shadow: none !important;
+}
+
+
 
 .search-box button:hover {
     background: var(--main-dark);

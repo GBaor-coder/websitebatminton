@@ -138,10 +138,17 @@
                                     <?php endif; ?>
                                 <?php endif; ?>
                             </div>
-                            <a href="/websitebatminton/cart" class="btn btn-primary w-100 btn-add-cart <?= (isset($product['quantity']) && $product['quantity'] == 0) ? 'disabled opacity-50' : ''; ?>">
-                                <i class="bi bi-cart-plus me-1"></i>
-                                <?= (isset($product['quantity']) && $product['quantity'] == 0) ? 'Hết hàng' : 'Thêm giỏ hàng'; ?>
-                            </a>
+                            <?php if (isset($product['quantity']) && $product['quantity'] == 0): ?>
+                                <button class="btn btn-primary w-100 disabled opacity-50" disabled>
+                                    <i class="bi bi-cart-plus me-1"></i>
+                                    Hết hàng
+                                </button>
+                            <?php else: ?>
+                                <a href="/websitebatminton/cart/add?product_id=<?= htmlspecialchars($product['id']) ?>" class="btn btn-primary w-100 btn-add-cart">
+                                    <i class="bi bi-cart-plus me-1"></i>
+                                    Thêm giỏ hàng
+                                </a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>

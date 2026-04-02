@@ -34,13 +34,14 @@
                                 </thead>
                                 <tbody>
                                     <?php foreach ($cartItems as $item): ?>
-                                        <tr>
+                                        <tr class="cart-item-row" data-id="<?= $item['id'] ?>">
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <img src="<?= $item['image'] ? '/websitebatminton/storage/uploads/' . $item['image'] : '/websitebatminton/assets/images/product.jpg' ?>" alt="<?= htmlspecialchars($item['name']) ?>" style="width: 70px; height:70px; object-fit: cover; border-radius:10px; margin-right: 12px;" />
                                                     <div>
-                                                        <a href="/websitebatminton/products/<?= $item['slug'] ?>" class="text-dark fw-semibold"><?= htmlspecialchars($item['name']) ?></a>
-                                                        <br><small class="text-muted">ID: #<?= str_pad($item['id'],5,'0',STR_PAD_LEFT) ?></small>
+                                                        <?php $itemSlug = trim($item['slug'] ?? ''); ?>
+<a href="<?= $itemSlug ? '/websitebatminton/products/' . urlencode($itemSlug) : '/websitebatminton/product?id=' . urlencode($item['id']) ?>" class="text-dark fw-semibold"><?= htmlspecialchars($item['name'] ?? 'Sản phẩm') ?></a>
+                                                        <br><small class="text-muted">ID: #<?= str_pad($item['id'] ?? 0,5,'0',STR_PAD_LEFT) ?></small>
                                                     </div>
                                                 </div>
                                             </td>
@@ -53,13 +54,13 @@
                                                 <?php endif; ?>
                                             </td>
                                             <td class="text-center" style="vertical-align: middle;">
-                                                <div class="d-flex mx-auto" style="width: 110px; gap: 6px;">
-                                                    <button class="btn btn-outline-secondary btn-sm qty-btn" data-action="decrease" data-id="<?= $item['id'] ?>">−</button>
-                                                    <input type="number" class="form-control form-control-sm text-center qty-input" value="<?= $item['quantity'] ?>" min="1" data-id="<?= $item['id'] ?>" style="width: 55px;" />
-                                                    <button class="btn btn-outline-secondary btn-sm qty-btn" data-action="increase" data-id="<?= $item['id'] ?>">+</button>
+                                                <div class="input-group input-group-sm mx-auto" style="width: 140px;">
+                                                    <button class="btn btn-outline-primary btn-sm qty-btn" data-action="decrease" data-id="<?= $item['id'] ?>">−</button>
+                                                    <input type="number" class="form-control form-control-sm text-center qty-input" value="<?= $item['quantity'] ?>" min="1" data-id="<?= $item['id'] ?>" style="width: 70px;" />
+                                                    <button class="btn btn-outline-primary btn-sm qty-btn" data-action="increase" data-id="<?= $item['id'] ?>">+</button>
                                                 </div>
                                             </td>
-                                            <td class="text-center align-middle" style="font-weight: 600; color: #0d6efd;">
+                                            <td class="text-center align-middle item-subtotal" style="font-weight: 600; color: #0d6efd;">
                                                 <?= formatPrice((!empty($item['sale_price']) ? $item['sale_price'] : $item['price']) * $item['quantity']) ?>
                                             </td>
                                             <td class="text-center align-middle">
@@ -110,7 +111,7 @@
                 <div class="card-body">
                     <div class="mb-3 d-flex justify-content-between">
                         <span>Tổng tiền:</span>
-                        <strong><?= formatPrice($cartTotal ?? 0) ?></strong>
+                        <strong class="total-amount"><?= formatPrice($cartTotal ?? 0) ?></strong>
                     </div>
                     <div class="form-check mb-3">
                         <input class="form-check-input" type="checkbox" value="" id="invoiceCheck">
@@ -158,20 +159,30 @@ function updateCart(id, qty) {
     .then(res => res.json())
     .then(data => {
         if (data.success) {
-            const row = document.querySelector(`.cart-item-row [data-id="${id}"]`)?.closest('tr');
-            const subtotal = document.querySelector(`.cart-item-row[data-id="${id}"] .subtotal`);
-            if (subtotal && data.subtotal) {
-                subtotal.textContent = data.subtotal;
+            const row = document.querySelector(`.cart-item-row[data-id="${id}"]`);
+            const subtotalCell = row ? row.querySelector('.item-subtotal') : null;
+
+            if (subtotalCell && data.subtotal) {
+                subtotalCell.textContent = data.subtotal;
             }
+
             const totalAmount = document.querySelector('.total-amount');
             if (totalAmount && data.cartTotal) {
                 totalAmount.textContent = data.cartTotal;
             }
+
             if (qty <= 0 && row) {
                 row.remove();
-                if (document.querySelectorAll('tbody tr').length === 0) location.reload();
+            }
+
+            // nếu không còn sản phẩm, reload để hiển thị “Giỏ hàng trống”
+            if (document.querySelectorAll('tbody tr').length === 0) {
+                location.reload();
             }
         }
+    })
+    .catch(err => {
+        console.error('Lỗi cập nhật giỏ hàng:', err);
     });
 }
 
@@ -221,9 +232,27 @@ function applyPromo() {
 </script>
 
 <style>
-    .btn-outline-primary:hover { background: linear-gradient(135deg, #1C42F3 0%, #1535CC 100%) !important; color: #fff !important; border-color: #1C42F3 !important; }
-    .card { transition: transform 0.2s ease, box-shadow 0.2s ease; }
-    .card:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(28,66,243,0.14); }
+    /* Giao diện cố định, không có hiệu ứng hover/transition */
+    * {
+        transition: none !important;
+        transform: none !important;
+        animation: none !important;
+    }
+
+    .btn, .btn:hover, .btn:focus, .btn:active {
+        box-shadow: none !important;
+    }
+
+    .card, .card:hover, .card:focus {
+        box-shadow: none !important;
+        border-color: #dee2e6 !important;
+    }
+
+    .btn-outline-primary:hover, .btn-outline-danger:hover {
+        background: #fff !important;
+        color: inherit !important;
+        border-color: inherit !important;
+    }
 </style>
 
 <?php require_once ROOT_PATH . '/resources/views/layouts/footer.php'; ?>

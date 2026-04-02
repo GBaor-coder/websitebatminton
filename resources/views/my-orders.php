@@ -18,9 +18,8 @@
                             </div>
 
                             <div class="list-group">
-                                <a href="/websitebatminton/profile" class="list-group-item list-group-item-action">Thông tin cá nhân</a>
-                                <a href="/websitebatminton/my-orders" class="list-group-item list-group-item-action active">Đơn hàng của bạn</a>
-<a href="/websitebatminton/profile/addresses" class="list-group-item list-group-item-action">Địa chỉ giao hàng</a>
+                                <a href="/websitebatminton/thanh-vien" class="list-group-item list-group-item-action">Thông tin cá nhân</a>
+                                <a href="/websitebatminton/profile/addresses" class="list-group-item list-group-item-action">Địa chỉ giao hàng</a>
                             </div>
                         </div>
                     </div>
@@ -28,7 +27,7 @@
                     <!-- Main Content - Orders List -->
                     <div class="col-md-8">
                         <div class="p-4 rounded-4 bg-white shadow-sm h-100">
-                            <h3 class="fw-bold mb-4">Đơn hàng của bạn</h3>
+                            <h3 class="fw-bold mb-4">Đơn hàng</h3>
 
                             <?php if (empty($orders)): ?>
                                 <div class="alert alert-info">

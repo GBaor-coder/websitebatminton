@@ -189,6 +189,19 @@ function addToCart($productId, $quantity = 1, $productData = []) {
     
     if (isset($cart[$productId])) {
         $cart[$productId]['quantity'] += $quantity;
+        // nếu lưu trữ thêm dữ liệu mới (slug/image) thì cập nhật vào cart hiện tại
+        if (!empty($productData['slug'])) {
+            $cart[$productId]['slug'] = $productData['slug'];
+        }
+        if (!empty($productData['image'])) {
+            $cart[$productId]['image'] = $productData['image'];
+        }
+        if (isset($productData['sale_price'])) {
+            $cart[$productId]['sale_price'] = $productData['sale_price'];
+        }
+        if (isset($productData['price'])) {
+            $cart[$productId]['price'] = $productData['price'];
+        }
     } else {
         $cart[$productId] = [
             'id' => $productId,

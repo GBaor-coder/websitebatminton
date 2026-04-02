@@ -126,6 +126,11 @@ class HomeController {
         }
 
         $user = $session->user();
+        if (($user['role'] ?? 'customer') === 'admin') {
+            $this->redirect('/websitebatminton/admin/dashboard');
+            return;
+        }
+
         $userId = $user['id'];
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -200,7 +205,7 @@ class HomeController {
     // [Include ALL other existing methods exactly as they are from the current file - products, productDetail, category, news, newsDetail, cart, profile, profileUpdate, myOrders, login, loginSubmit, register, registerSubmit, logout, verifyEmail, contact, contactSend, contactSuccess, about, adminContacts, checkout, createOrder, clearCart, orderDetail, guide]
     
     /**
-     * Products - Product listing page
+     * Products - Product listing page // trang danh sách sản phẩm với phân trang, tìm kiếm và lọc theo danh mục
      */
     public function products() {
         $categoryId = $_GET['category'] ?? null;
@@ -208,12 +213,12 @@ class HomeController {
         $page = $_GET['page'] ?? 1;
         $perPage = 12;
         
-        // Get products with pagination
+        // Get products with pagination // lấy sản phẩm có phân trang, tìm kiếm và lọc theo danh mục
         $products = $this->productModel->getPaginated($page, $perPage, $search, $categoryId);
         $totalProducts = $this->productModel->countProducts($search, $categoryId);
         $totalPages = ceil($totalProducts / $perPage);
         
-        // Get categories
+        // Get categories // để hiển thị bộ lọc danh mục trên trang sản phẩm
         $categories = $this->categoryModel->getActiveCategories();
         
         $data = [
@@ -229,13 +234,21 @@ class HomeController {
     }
     
     /**
-     * Product Detail - Single product page
+     * Product Detail - Single product page // chi tiết sản phẩm
      */
     public function productDetail() {
-        $slug = $_GET['slug'] ?? '';
-        
-        $product = $this->productModel->findBySlug($slug);
-        
+        // Làm việc với params router và fallback query string id (nếu slug bị thiếu)
+        $slug = $this->getParam('slug', '') ?: ($_GET['slug'] ?? '');
+        $product = null;
+
+        if ($slug) {
+            $product = $this->productModel->findBySlug($slug);
+        }
+
+        if (!$product && !empty($_GET['id'])) {
+            $product = $this->productModel->find(intval($_GET['id']));
+        }
+
         if (!$product) {
             echo "Product not found";
             return;
@@ -270,7 +283,7 @@ class HomeController {
             }
         }
 
-        // Get related products
+        // Get related products // sản phẩm liên quan cùng danh mục
         $relatedProducts = $this->productModel->getByCategory($product['category_id'], 4);
         
         $data = [
@@ -282,7 +295,8 @@ class HomeController {
     }
     
     /**
-     * Category - Products by category
+     * Category - Products by category // trang sản phẩm theo danh mục
+     * 
      */
     public function category() {
         $slug = $_GET['slug'] ?? '';
@@ -305,7 +319,7 @@ class HomeController {
     }
     
     /**
-     * News - Blog/News listing
+     * News - Blog/News listing // trang tin tức, bài viết
      */
     public function news() {
         $page = $_GET['page'] ?? 1;
@@ -325,7 +339,7 @@ class HomeController {
     }
     
     /**
-     * News Detail - Single post page
+     * News Detail - Single post page // chi tiết tin tức, bài viết
      */
     public function newsDetail() {
         $slug = $_GET['slug'] ?? '';
@@ -345,8 +359,33 @@ class HomeController {
     }
     
     /**
-     * Cart - Cart page
+     * Cart - Cart page // thêm sản phẩm vào giỏ hàng và hiển thị giỏ hàng
      */
+    public function addToCart() {
+        $productId = $_GET['product_id'] ?? null;
+        if (!$productId) {
+            $this->redirect('/websitebatminton/products');
+            return;
+        }
+
+        $product = $this->productModel->find($productId);
+        if (!$product) {
+            $this->redirect('/websitebatminton/products');
+            return;
+        }
+
+        // Add to cart helper // thêm sản phẩm vào giỏ hàng trong session
+        addToCart($productId, 1, [
+            'name' => $product['name'],
+            'slug' => $product['slug'],
+            'price' => $product['price'],
+            'sale_price' => $product['sale_price'] ?? null,
+            'image' => $product['image'] ?? ''
+        ]);
+
+        $this->redirect('/websitebatminton/cart');
+    }
+
     public function cart() {
         // Get cart from session
         $cartItems = $_SESSION['cart'] ?? [];
@@ -367,6 +406,76 @@ class HomeController {
         $this->view('cart', $data);
     }
 
+    public function updateCart() {
+        header('Content-Type: application/json');
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            http_response_code(405);
+            echo json_encode(['success' => false, 'message' => 'Method not allowed']);
+            return;
+        }
+
+        $id = $_POST['id'] ?? null;
+        $quantity = isset($_POST['quantity']) ? intval($_POST['quantity']) : null;
+
+        if (!$id || $quantity === null) {
+            http_response_code(400);
+            echo json_encode(['success' => false, 'message' => 'Dữ liệu không hợp lệ']);
+            return;
+        }
+
+        if ($quantity <= 0) {
+            removeFromCart($id);
+        } else {
+            updateCartItem($id, $quantity);
+        }
+
+        $cartItems = getCart();
+        $cartTotalValue = cartTotal();
+
+        $item = $cartItems[$id] ?? null;
+        $subtotal = 0;
+        if ($item) {
+            $price = $item['sale_price'] ?? $item['price'];
+            $subtotal = $price * $item['quantity'];
+        }
+
+        echo json_encode([
+            'success' => true,
+            'cartTotal' => formatPrice($cartTotalValue),
+            'subtotal' => $item ? formatPrice($subtotal) : formatPrice(0),
+            'itemCount' => count($cartItems)
+        ]);
+    }
+
+    public function removeCart() {
+        header('Content-Type: application/json');
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            http_response_code(405);
+            echo json_encode(['success' => false, 'message' => 'Method not allowed']);
+            return;
+        }
+
+        $id = $_POST['id'] ?? null;
+
+        if (!$id) {
+            http_response_code(400);
+            echo json_encode(['success' => false, 'message' => 'ID sản phẩm không hợp lệ']);
+            return;
+        }
+
+        removeFromCart($id);
+
+        $cartTotalValue = cartTotal();
+
+        echo json_encode([
+            'success' => true,
+            'cartTotal' => formatPrice($cartTotalValue),
+            'itemCount' => count(getCart())
+        ]);
+    }
+
     public function profile() {
         $session = new \Session();
         if (!$session->isLoggedIn()) {
@@ -375,6 +484,12 @@ class HomeController {
         }
 
         $user = $session->user();
+        if (($user['role'] ?? 'customer') === 'admin') {
+            // Nếu admin vô nhầm trang thành viên thì chuyển về admin dashboard
+            $this->redirect('/websitebatminton/admin/dashboard');
+            return;
+        }
+
         $profile = [
             'id' => $user['id'],
             'name' => $user['name'] ?? 'Người dùng',
@@ -396,7 +511,7 @@ class HomeController {
      */
     public function profileUpdate() {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            $this->redirect('/websitebatminton/profile');
+            $this->redirect('/websitebatminton/thanh-vien');
             return;
         }
 
@@ -410,7 +525,7 @@ class HomeController {
         // Validate CSRF
         if (!$this->validateCsrf()) {
             $_SESSION['error'] = 'Lỗi bảo mật CSRF. Vui lòng thử lại.';
-            $this->redirect('/websitebatminton/profile');
+            $this->redirect('/websitebatminton/thanh-vien');
             return;
         }
 
@@ -474,11 +589,11 @@ class HomeController {
             $session->set('user', $user);
 
             $_SESSION['success'] = 'Cập nhật thông tin thành công';
-            $this->redirect('/websitebatminton/profile');
+            $this->redirect('/websitebatminton/thanh-vien');
         } catch (Exception $e) {
             error_log('Profile update error: ' . $e->getMessage());
             $_SESSION['error'] = 'Lỗi cập nhật thông tin: ' . $e->getMessage();
-            $this->redirect('/websitebatminton/profile');
+            $this->redirect('/websitebatminton/thanh-vien');
         }
     }
 
@@ -512,7 +627,7 @@ class HomeController {
             if (($session->user()['role'] ?? 'customer') === 'admin') {
                 $this->redirect('/websitebatminton/admin/dashboard');
             } else {
-                $this->redirect('/websitebatminton/profile');
+                $this->redirect('/websitebatminton/thanh-vien');
             }
             return;
         }
@@ -573,7 +688,7 @@ class HomeController {
         if (($user['role'] ?? 'customer') === 'admin') {
             $this->redirect('/websitebatminton/admin/dashboard');
         } else {
-            $this->redirect('/websitebatminton/profile');
+            $this->redirect('/websitebatminton/thanh-vien');
         }
     }
 
@@ -596,7 +711,7 @@ class HomeController {
 
         $firstName = trim($_POST['first_name'] ?? '');
         $lastName = trim($_POST['last_name'] ?? '');
-        $name = trim(($firstName . ' ' . $last_name));
+        $name = trim($firstName . ' ' . $lastName);
         $email = trim($_POST['email'] ?? '');
         $phone = trim($_POST['phone'] ?? '');
         $password = $_POST['password'] ?? '';

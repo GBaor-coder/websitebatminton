@@ -17,10 +17,10 @@
                                 <small class="text-muted"><?= htmlspecialchars($profile['email']) ?></small>
                             </div>
 
+                            <?php $session = new \Session(); $isAdmin = ($session->isLoggedIn() && ($session->user()['role'] ?? '') === 'admin'); ?>
                             <div class="list-group">
-                                <a href="/websitebatminton/profile" class="list-group-item list-group-item-action active">Thông tin cá nhân</a>
-                                <a href="/websitebatminton/my-orders" class="list-group-item list-group-item-action">Đơn hàng của bạn</a>
-<a href="/websitebatminton/profile/addresses" class="list-group-item list-group-item-action">Địa chỉ giao hàng</a>
+                                <a href="/websitebatminton/thanh-vien" class="list-group-item list-group-item-action active">Thông tin cá nhân</a>
+                                <a href="<?= $isAdmin ? '/websitebatminton/admin/dashboard' : '/websitebatminton/profile/addresses' ?>" class="list-group-item list-group-item-action"><?= $isAdmin ? 'Quản lý dashboard' : 'Địa chỉ giao hàng' ?></a>
                             </div>
                         </div>
                     </div>

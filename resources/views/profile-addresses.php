@@ -18,8 +18,7 @@
                             </div>
 
                             <div class="list-group">
-                                <a href="/websitebatminton/profile" class="list-group-item list-group-item-action">Thông tin cá nhân</a>
-                                <a href="/websitebatminton/my-orders" class="list-group-item list-group-item-action">Đơn hàng của bạn</a>
+                                <a href="/websitebatminton/thanh-vien" class="list-group-item list-group-item-action">Thông tin cá nhân</a>
                                 <a href="/websitebatminton/profile/addresses" class="list-group-item list-group-item-action active">Địa chỉ giao hàng</a>
                             </div>
                         </div>
@@ -81,7 +80,7 @@
                                 </div>
                                 <div class="col-12">
                                     <button type="submit" class="btn btn-primary px-5">Cập nhật địa chỉ</button>
-                                    <a href="/websitebatminton/profile" class="btn btn-outline-secondary ms-2">Quay lại</a>
+                                    <a href="/websitebatminton/thanh-vien" class="btn btn-outline-secondary ms-2">Quay lại</a>
                                 </div>
                             </form>
                         </div>

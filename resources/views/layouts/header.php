@@ -71,9 +71,16 @@
                                     </a>
                                     <?php $session = new \Session(); ?>
                                     <?php if ($session->isLoggedIn()): ?>
+                                        <?php
+                                            $profileUrl = '/websitebatminton/thanh-vien';
+                                            $profileLabel = 'Thành viên';
+                                            if (($session->user()['role'] ?? 'customer') === 'admin') {
+                                                $profileUrl = '/websitebatminton/admin';
+                                                $profileLabel = 'Admin';
+                                            }
+                                        ?>
                                         <ul class="dropdown-menu dropdown-menu-end">
-                                            <li><a class="dropdown-item" href="/websitebatminton/profile">Thông tin cá nhân</a></li>
-                                            <li><a class="dropdown-item" href="/websitebatminton/my-orders">Đơn hàng của tôi</a></li>
+                                            <li><a class="dropdown-item" href="<?= $profileUrl ?>"><?= $profileLabel ?></a></li>
                                             <li><hr class="dropdown-divider"></li>
                                             <li><a class="dropdown-item" href="/websitebatminton/logout">Đăng xuất</a></li>
                                         </ul>

@@ -28,6 +28,30 @@ class DashboardController extends AdminBaseController {
     /**
      * Dashboard index
      */
+    public function profile() {
+        $session = new \Session();
+        if (!$session->isLoggedIn() || (($session->user()['role'] ?? '') !== 'admin')) {
+            header('Location: /websitebatminton/login');
+            exit;
+        }
+
+        $user = $session->user();
+        $profile = [
+            'id' => $user['id'],
+            'name' => $user['name'] ?? 'Administrator',
+            'email' => $user['email'] ?? '',
+            'phone' => $user['phone'] ?? '',
+            'gender' => $user['gender'] ?? 'male',
+            'address' => $user['address'] ?? '',
+            'country' => $user['country'] ?? 'Việt Nam',
+            'city' => $user['city'] ?? '',
+            'birthdate' => $user['birthdate'] ?? ''
+        ];
+
+        // render public profile view (user-style)
+        $this->view('profile', ['profile' => $profile]);
+    }
+
     public function index() {
         // Get statistics
         $productStats = $this->productModel->getStats();
