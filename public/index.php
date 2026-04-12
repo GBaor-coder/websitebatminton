@@ -92,6 +92,8 @@ $router->post('api/clear-cart', ['controller' => 'Home', 'action' => 'clearCart'
 // Profile
 $router->get('profile', ['controller' => 'Home', 'action' => 'profile']);
 $router->get('thanh-vien', ['controller' => 'Home', 'action' => 'profile']);
+$router->get('profile/addresses', ['controller' => 'Home', 'action' => 'addresses']);
+$router->post('profile/addresses', ['controller' => 'Home', 'action' => 'addresses']);
 $router->post('profile/update', ['controller' => 'Home', 'action' => 'profileUpdate']);
 $router->get('my-orders', ['controller' => 'Home', 'action' => 'myOrders']);
 $router->get('order/{id}', ['controller' => 'Home', 'action' => 'orderDetail']);

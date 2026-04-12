@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $pageTitle ?? 'JP SPORT - Cầu lông Chính hãng'; ?></title>
     <meta name="description" content="Shop cầu lông chính hãng Yonex, Victor, Lining - Vợt cầu lông, giày cầu lông, phụ kiện cầu lông">
-    <link rel="shortcut icon" href="assets\images\favicon\JPfavicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="/websitebatminton/assets/images/favicon/JPfavicon.png" type="image/x-icon">
     <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Bootstrap Icons -->
@@ -13,8 +13,8 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="assets\css\style.css">
-    <link rel="stylesheet" href="assets\css\products.css">
+    <link rel="stylesheet" href="/websitebatminton/assets/css/style.css">
+    <link rel="stylesheet" href="/websitebatminton/assets/css/products.css">
 </head>
 <body>
 
@@ -28,7 +28,7 @@
                 <!-- Logo -->
                 <div class="col-lg-2 col-md-3 col-6">
                     <a href="/websitebatminton/" class="jp-logo">
-                        <img src="assets\images\logo\JPTachnen.png" alt="JP SPORT Logo" class="logo-jptachnenpng img-fluid w-75">
+<img src="/websitebatminton/assets/images/logo/JPTachnen.png" alt="JP SPORT Logo" class="logo-jptachnenpng img-fluid w-75">
                     </a>
                 </div>
                 
@@ -133,7 +133,7 @@
                         <a class="nav-link text-center" href="/websitebatminton/">Trang chủ</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="/websitebatminton/products" id="productsDropdown" role="button" data-bs-toggle="dropdown">
+                        <a class="nav-link dropdown-toggle" href="/websitebatminton/products" id="productsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Sản phẩm
                         </a>
                         <ul class="dropdown-menu">

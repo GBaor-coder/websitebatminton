@@ -10,13 +10,13 @@ require_once ROOT_PATH . '/resources/views/layouts/header.php';
 <div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="assets\images\banner\baner-yonex-astrox-99.jpg" class="d-block w-100" >
+      <img src="/websitebatminton/assets/images/banner/baner-yonex-astrox-99.jpg" class="d-block w-100" >
     </div>
     <div class="carousel-item">
-      <img src="assets\images\banner\banner1.webp" class="d-block w-100" >
+      <img src="/websitebatminton/assets/images/banner/banner1.webp" class="d-block w-100" >
     </div>
     <div class="carousel-item">
-      <img src="assets\images\banner\baner-victor-axelsen.webp" class="d-block w-100" >
+      <img src="/websitebatminton/assets/images/banner/baner-victor-axelsen.webp" class="d-block w-100" >
   </div>
 </div>
 <!-- ============================================
