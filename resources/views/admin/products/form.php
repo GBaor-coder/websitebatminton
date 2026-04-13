@@ -46,13 +46,7 @@
                                        value="<?php echo $product['price'] ?? ''; ?>" min="0" step="1000" required>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="sale_price" class="form-label">Giá khuyến mãi</label>
-                                <input type="number" class="form-control" id="sale_price" name="sale_price" 
-                                       value="<?php echo $product['sale_price'] ?? ''; ?>" min="0" step="1000">
-                            </div>
-                        </div>
+
                     </div>
                     
                     <div class="mb-3">

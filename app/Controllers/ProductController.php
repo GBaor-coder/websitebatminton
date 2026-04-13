@@ -103,8 +103,7 @@ class ProductController extends AdminBaseController {
             'slug' => $this->productModel->generateSlug($_POST['name']),
             'category_id' => (int)$_POST['category_id'],
             'description' => trim($_POST['description']),
-            'price' => (float)$_POST['price'],
-            'sale_price' => !empty($_POST['sale_price']) ? (float)$_POST['sale_price'] : null,
+'price' => (float)$_POST['price'],
             'quantity' => (int)$_POST['quantity'],
             'image' => $image,
             'status' => $_POST['status'] ?? 'active',
@@ -198,8 +197,7 @@ class ProductController extends AdminBaseController {
             'slug' => $this->productModel->generateSlug($_POST['name']),
             'category_id' => (int)$_POST['category_id'],
             'description' => trim($_POST['description']),
-            'price' => (float)$_POST['price'],
-            'sale_price' => !empty($_POST['sale_price']) ? (float)$_POST['sale_price'] : null,
+'price' => (float)$_POST['price'],
             'quantity' => (int)$_POST['quantity'],
             'image' => $image,
             'status' => $_POST['status'] ?? 'active',
@@ -290,9 +288,7 @@ class ProductController extends AdminBaseController {
             $errors[] = 'Giá sản phẩm không hợp lệ';
         }
         
-        if (!empty($data['sale_price']) && $data['sale_price'] > $data['price']) {
-            $errors[] = 'Giá khuyến mãi phải nhỏ hơn giá gốc';
-        }
+
         
         if (!isset($data['quantity']) || $data['quantity'] < 0) {
             $errors[] = 'Số lượng sản phẩm không hợp lệ';

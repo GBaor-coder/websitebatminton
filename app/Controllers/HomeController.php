@@ -286,8 +286,7 @@ class HomeController {
                 'name' => $product['name'],
                 'slug' => $product['slug'],
                 'image' => $product['image'] ?? '',
-                'price' => $product['price'],
-                'sale_price' => $product['sale_price'] ?? null
+                'price' => $product['price']
             ]);
             // giữ tối đa 10 mục
             if (count($_SESSION['viewed_items']) > 10) {
@@ -390,8 +389,7 @@ class HomeController {
         addToCart($productId, 1, [
             'name' => $product['name'],
             'slug' => $product['slug'],
-            'price' => $product['price'],
-            'sale_price' => $product['sale_price'] ?? null,
+'price' => $product['price'],
             'image' => $product['image'] ?? ''
         ]);
 
@@ -405,7 +403,7 @@ class HomeController {
         $cartTotal = 0;
         
         foreach ($cartItems as $item) {
-            $price = $item['sale_price'] ?? $item['price'];
+            $price = $item['price'];
             $cartTotal += $price * $item['quantity'];
         }
         
@@ -448,7 +446,7 @@ class HomeController {
         $item = $cartItems[$id] ?? null;
         $subtotal = 0;
         if ($item) {
-            $price = $item['sale_price'] ?? $item['price'];
+            $price = $item['price'];
             $subtotal = $price * $item['quantity'];
         }
 
@@ -909,7 +907,7 @@ class HomeController {
 
         $cartTotal = 0;
         foreach ($cartItems as $item) {
-            $price = $item['sale_price'] ?? $item['price'];
+            $price = $item['price'];
             $cartTotal += $price * $item['quantity'];
         }
 

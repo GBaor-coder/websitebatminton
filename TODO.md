@@ -1,16 +1,16 @@
-# PROFILE SYSTEM REFACTOR PROGRESS
+# TODO: Remove HÀNG SALE SECTION Completely
 
-## PROFILE SYSTEM REFACTOR ✅ COMPLETE
+Status: In progress
 
-All 4 steps done:
-- [x] Shared sidebar-profile.php with dynamic active menu
-- [x] profile.php: Standard grid + pill forms + gradient buttons
-- [x] my-orders.php: Orders table + empty state + pagination
-- [x] profile-addresses.php: Perfect form + address card
+## Plan Steps:
+1. ✅ Create TODO.md (done)
+2. ✅ Edit `resources/views/home.php`: Remove sale-section HTML + CSS
+3. ✅ Edit `app/Controllers/HomeController.php`: Remove all sale_price logic
+4. ✅ Edit `app/Controllers/ProductController.php`: Remove sale_price CRUD
+5. ✅ Edit `app/Models/Product.php`: Remove sale_price from $fillable
+6. ✅ Edit `resources/views/admin/products/form.php`: Remove sale_price input
+7. **[PENDING]** Verify no errors: test homepage, cart, admin product form
+8. **[PENDING]** Final cleanup + attempt_completion
 
-**Layout**: All use col-md-3 sidebar + col-md-9 content
-**Active menu**: Auto-detects current page
-**Design**: Consistent cards, shadows, gradients #2b3cff, hover effects
-**Responsive**: Mobile-first Bootstrap 5
+Next step will be marked ✅ after completion.
 
-Ready to test: /thanh-vien, /my-orders, /profile/addresses
