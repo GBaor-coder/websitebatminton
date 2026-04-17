@@ -37,6 +37,21 @@
                             <?php endif; ?>
                         </select>
                     </div>
+
+                    <div class="mb-3">
+                        <label for="brand_id" class="form-label">Hãng</label>
+                        <select class="form-select" id="brand_id" name="brand_id">
+                            <option value="">-- Chọn hãng --</option>
+                            <?php if (!empty($brands)): ?>
+                                <?php foreach ($brands as $brand): ?>
+                                <option value="<?php echo $brand['id']; ?>" 
+                                        <?php echo ($product['brand_id'] ?? '') == $brand['id'] ? 'selected' : ''; ?>>
+                                    <?php echo $brand['name']; ?>
+                                </option>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+                        </select>
+                    </div>
                     
                     <div class="row">
                         <div class="col-md-6">
@@ -106,4 +121,49 @@
         </form>
     </div>
 </div>
+
+<script>
+    function renderBrandOptions(brands) {
+        var brandSelect = document.getElementById('brand_id');
+        var selectedValue = brandSelect.value || '';
+        brandSelect.innerHTML = '<option value="">-- Chọn hãng --</option>';
+
+        brands.forEach(function(brand) {
+            var option = document.createElement('option');
+            option.value = brand.id;
+            option.textContent = brand.name;
+            if (selectedValue === String(brand.id)) {
+                option.selected = true;
+            }
+            brandSelect.appendChild(option);
+        });
+    }
+
+    document.getElementById('category_id').addEventListener('change', function() {
+        var categoryId = this.value;
+        var url = '/websitebatminton/admin/brands/filter';
+
+        if (categoryId) {
+            url += '?category_id=' + encodeURIComponent(categoryId);
+        }
+
+        fetch(url, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+        .then(function(response) {
+            return response.json();
+        })
+        .then(function(data) {
+            if (data.success) {
+                renderBrandOptions(data.brands);
+            }
+        })
+        .catch(function() {
+            // ignore errors silently
+        });
+    });
+</script>
 

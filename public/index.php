@@ -137,6 +137,14 @@ $router->get('admin/categories/edit', ['controller' => 'Category', 'action' => '
 $router->post('admin/categories/update', ['controller' => 'Category', 'action' => 'update']);
 $router->post('admin/categories/delete', ['controller' => 'Category', 'action' => 'delete']);
 
+$router->get('admin/brands', ['controller' => 'Brand', 'action' => 'index']);
+$router->get('admin/brands/create', ['controller' => 'Brand', 'action' => 'create']);
+$router->post('admin/brands/store', ['controller' => 'Brand', 'action' => 'store']);
+$router->get('admin/brands/edit', ['controller' => 'Brand', 'action' => 'edit']);
+$router->post('admin/brands/update', ['controller' => 'Brand', 'action' => 'update']);
+$router->post('admin/brands/delete', ['controller' => 'Brand', 'action' => 'delete']);
+$router->get('admin/brands/filter', ['controller' => 'Brand', 'action' => 'filter']);
+
 $router->get('admin/orders', ['controller' => 'Order', 'action' => 'index']);
 $router->get('admin/orders/view', ['controller' => 'Order', 'action' => 'show']);
 $router->post('admin/orders/status', ['controller' => 'Order', 'action' => 'status']);

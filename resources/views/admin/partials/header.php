@@ -74,6 +74,9 @@
                     <a href="/websitebatminton/admin/categories" class="<?php echo strpos($_SERVER['REQUEST_URI'], 'categories') !== false ? 'active' : ''; ?>">
                         <i class="fas fa-tags"></i> Danh mục
                     </a>
+                    <a href="/websitebatminton/admin/brands" class="<?php echo strpos($_SERVER['REQUEST_URI'], 'brands') !== false ? 'active' : ''; ?>">
+                        <i class="fas fa-industry"></i> Quản lý Hãng
+                    </a>
                     <a href="/websitebatminton/admin/orders" class="<?php echo strpos($_SERVER['REQUEST_URI'], 'orders') !== false ? 'active' : ''; ?>">
                         <i class="fas fa-shopping-cart"></i> Đơn hàng
                     </a>

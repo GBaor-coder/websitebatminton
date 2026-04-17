@@ -137,11 +137,24 @@
                             Sản phẩm
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/websitebatminton/products?category=1">Vợt cầu lông</a></li>
-                            <li><a class="dropdown-item" href="/websitebatminton/products?category=2">Giày cầu lông</a></li>
-                            <li><a class="dropdown-item" href="/websitebatminton/products?category=3">Phụ kiện</a></li>
-                            <li><a class="dropdown-item" href="/websitebatminton/products?category=4">Quần áo</a></li>
-                            <li><a class="dropdown-item" href="/websitebatminton/products?category=5">Balo cầu lông</a></li>
+                            <?php if (!empty($menu)): ?>
+                                <?php foreach ($menu as $category): ?>
+                                    <li class="dropdown-header"><?= htmlspecialchars($category['name']) ?></li>
+                                    <?php if (!empty($category['brands'])): ?>
+                                        <?php foreach ($category['brands'] as $brand): ?>
+                                            <li>
+                                                <a class="dropdown-item ps-4" href="/websitebatminton/products?category=<?= $category['id'] ?>&amp;brand=<?= $brand['id'] ?>">
+                                                    <?= htmlspecialchars($brand['name']) ?>
+                                                </a>
+                                            </li>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <li><a class="dropdown-item ps-4" href="/websitebatminton/products?category=<?= $category['id'] ?>">Xem tất cả</a></li>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <li><a class="dropdown-item" href="/websitebatminton/products">Chưa có danh mục</a></li>
+                            <?php endif; ?>
                         </ul>
                     </li>
                     <li class="nav-item">

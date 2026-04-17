@@ -15,6 +15,7 @@ class HomeController {
     private $postModel;
     private $userModel;
     private $params = [];
+    private $menu = [];
     
     private $rememberSecret = 'jpsport_remember_secret_2026';
 
@@ -25,6 +26,9 @@ class HomeController {
         $this->userModel = new User();
         $this->params = $params;
         $this->autoLoginFromCookie();
+
+        // Load dynamic menu from database for all public views
+        $this->menu = $this->categoryModel->getCategoriesWithBrands();
     }
 
     /**
@@ -83,6 +87,8 @@ class HomeController {
      * View - Render a view file
      */
     private function view($view, $data = []) {
+        // Always pass menu data to the view so header can render dynamic categories and brands
+        $data['menu'] = $this->menu;
         extract($data);
         
         $viewFile = ROOT_PATH . '/resources/views/' . $view . '.php';

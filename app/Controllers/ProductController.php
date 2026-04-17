@@ -7,16 +7,19 @@
 require_once __DIR__ . '/AdminBaseController.php';
 require_once __DIR__ . '/../Models/Product.php';
 require_once __DIR__ . '/../Models/Category.php';
+require_once __DIR__ . '/../Models/Brand.php';
 
 class ProductController extends AdminBaseController {
     private $productModel;
     private $categoryModel;
+    private $brandModel;
     
     public function __construct($params = []) {
         parent::__construct($params);
         
         $this->productModel = new Product();
         $this->categoryModel = new Category();
+        $this->brandModel = new Brand();
     }
     
     /**
@@ -56,10 +59,12 @@ class ProductController extends AdminBaseController {
      */
     public function create() {
         $categories = $this->categoryModel->getActiveCategories();
+        $brands = $this->brandModel->getActiveBrands();
         
         $data = [
             'title' => 'Thêm sản phẩm mới',
             'categories' => $categories,
+            'brands' => $brands,
             'product' => null
         ];
         
@@ -102,6 +107,7 @@ class ProductController extends AdminBaseController {
             'name' => trim($_POST['name']),
             'slug' => $this->productModel->generateSlug($_POST['name']),
             'category_id' => (int)$_POST['category_id'],
+            'brand_id' => !empty($_POST['brand_id']) ? (int)$_POST['brand_id'] : null,
             'description' => trim($_POST['description']),
 'price' => (float)$_POST['price'],
             'quantity' => (int)$_POST['quantity'],
@@ -134,10 +140,12 @@ class ProductController extends AdminBaseController {
         }
         
         $categories = $this->categoryModel->getActiveCategories();
+        $brands = $this->brandModel->getActiveBrands();
         
         $data = [
             'title' => 'Chỉnh sửa sản phẩm',
             'categories' => $categories,
+            'brands' => $brands,
             'product' => $product
         ];
         
@@ -196,6 +204,7 @@ class ProductController extends AdminBaseController {
             'name' => trim($_POST['name']),
             'slug' => $this->productModel->generateSlug($_POST['name']),
             'category_id' => (int)$_POST['category_id'],
+            'brand_id' => !empty($_POST['brand_id']) ? (int)$_POST['brand_id'] : null,
             'description' => trim($_POST['description']),
 'price' => (float)$_POST['price'],
             'quantity' => (int)$_POST['quantity'],

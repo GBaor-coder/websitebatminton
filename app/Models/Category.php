@@ -19,6 +19,43 @@ class Category extends Model {
             "SELECT * FROM {$this->table} WHERE status = 'active' ORDER BY name ASC"
         );
     }
+
+    /**
+     * Get categories with their active brands for menu display
+     *
+     * @return array
+     */
+    public function getCategoriesWithBrands() {
+        $sql = "SELECT c.id AS category_id, c.name AS category_name, b.id AS brand_id, b.name AS brand_name " .
+               "FROM {$this->table} c " .
+               "LEFT JOIN brands b ON b.category_id = c.id AND b.status = 'active' " .
+               "WHERE c.status = 'active' " .
+               "ORDER BY c.name ASC, b.name ASC";
+
+        $rows = $this->db->fetchAll($sql);
+        $menu = [];
+
+        foreach ($rows as $row) {
+            $categoryId = $row['category_id'];
+
+            if (!isset($menu[$categoryId])) {
+                $menu[$categoryId] = [
+                    'id' => $categoryId,
+                    'name' => $row['category_name'],
+                    'brands' => []
+                ];
+            }
+
+            if (!empty($row['brand_id'])) {
+                $menu[$categoryId]['brands'][] = [
+                    'id' => $row['brand_id'],
+                    'name' => $row['brand_name']
+                ];
+            }
+        }
+
+        return $menu;
+    }
     
     /**
      * Get category by slug

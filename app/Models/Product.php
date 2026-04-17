@@ -9,7 +9,7 @@ require_once __DIR__ . '/Model.php';
 class Product extends Model {
     protected $table = 'products';
     protected $primaryKey = 'id';
-    protected $fillable = ['name', 'slug', 'category_id', 'description', 'content', 'price', 'quantity', 'sku', 'image', 'images', 'featured', 'status', 'views'];
+    protected $fillable = ['name', 'slug', 'category_id', 'brand_id', 'description', 'content', 'price', 'quantity', 'sku', 'image', 'images', 'featured', 'status', 'views'];
     
     /**
      * Get all active products
@@ -53,8 +53,9 @@ class Product extends Model {
     public function getPaginated($page = 1, $perPage = 10, $search = '', $categoryId = null) {
         $offset = ($page - 1) * $perPage;
         
-        $sql = "SELECT p.*, c.name as category_name FROM {$this->table} p 
-                LEFT JOIN categories c ON p.category_id = c.id";
+        $sql = "SELECT p.*, c.name as category_name, b.name as brand_name FROM {$this->table} p 
+                LEFT JOIN categories c ON p.category_id = c.id 
+                LEFT JOIN brands b ON p.brand_id = b.id";
         $params = [];
         
         $conditions = ["p.status = 'active'"];
@@ -86,8 +87,9 @@ class Product extends Model {
     public function getPaginatedWithFilters($page = 1, $perPage = 10, $search = '', $categoryId = null, $brand = null, $priceRange = null, $color = null, $size = null, $sort = 'newest') {
         $offset = ($page - 1) * $perPage;
         
-        $sql = "SELECT p.*, c.name as category_name FROM {$this->table} p 
-                LEFT JOIN categories c ON p.category_id = c.id";
+        $sql = "SELECT p.*, c.name as category_name, b.name as brand_name FROM {$this->table} p 
+                LEFT JOIN categories c ON p.category_id = c.id 
+                LEFT JOIN brands b ON p.brand_id = b.id";
         $params = [];
         
         $conditions = ["p.status = 'active'"];
