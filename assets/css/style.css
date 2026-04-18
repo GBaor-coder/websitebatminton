@@ -209,22 +209,15 @@ ul {
 }
 
 /* Dropdown */
-.dropdown-menu {
-    border: none;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-    border-radius: 8px;
-    margin-top: 0;
-}
-
-.dropdown-item {
+.nav-item .dropdown-menu .dropdown-item {
     padding: 10px 20px;
     color: var(--gray-dark);
     transition: all 0.3s;
+    background: transparent; 
 }
-
-.dropdown-item:hover {
-    background: var(--main-color);
-    color: var(--white);
+.nav-item .dropdown-menu .dropdown-item:hover {
+    background: transparent; 
+    color: var(--main-color); 
 }
 
 /* Navbar Toggler */

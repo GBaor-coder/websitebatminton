@@ -132,30 +132,48 @@
                     <li class="nav-item">
                         <a class="nav-link text-center" href="/websitebatminton/">Trang chủ</a>
                     </li>
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown position-static">
                         <a class="nav-link dropdown-toggle" href="/websitebatminton/products" id="productsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Sản phẩm
                         </a>
-                        <ul class="dropdown-menu">
-                            <?php if (!empty($menu)): ?>
-                                <?php foreach ($menu as $category): ?>
-                                    <li class="dropdown-header"><?= htmlspecialchars($category['name']) ?></li>
-                                    <?php if (!empty($category['brands'])): ?>
-                                        <?php foreach ($category['brands'] as $brand): ?>
-                                            <li>
-                                                <a class="dropdown-item ps-4" href="/websitebatminton/products?category=<?= $category['id'] ?>&amp;brand=<?= $brand['id'] ?>">
-                                                    <?= htmlspecialchars($brand['name']) ?>
+
+                        <div class="dropdown-menu w-100 mt-0 p-4 border-0 shadow">
+                            <div class="container">
+                                <div class="row">
+
+                                    <?php if (!empty($menu)): ?>
+                                        <?php foreach ($menu as $category): ?>
+                                            <div class="col-md-2 mb-3">
+                                                
+                                                <!-- Tên danh mục -->
+                                                <h6 class="fw-bold text-uppercase">
+                                                    <?= htmlspecialchars($category['name']) ?>
+                                                </h6>
+                                                <hr>
+
+                                                <!-- Danh sách brand -->
+                                                <?php if (!empty($category['brands'])): ?>
+                                                    <?php foreach ($category['brands'] as $brand): ?>
+                                                        <a class="dropdown-item px-0"
+                                                        href="/websitebatminton/products?category=<?= $category['id'] ?>&brand=<?= $brand['id'] ?>">
+                                                            <?= htmlspecialchars($brand['name']) ?>
+                                                        </a>
+                                                    <?php endforeach; ?>
+                                                <?php endif; ?>
+
+                                                <!-- Xem thêm -->
+                                                <a class="text-danger small"
+                                                href="/websitebatminton/products?category=<?= $category['id'] ?>">
+                                                    Xem thêm
                                                 </a>
-                                            </li>
+
+                                            </div>
                                         <?php endforeach; ?>
-                                    <?php else: ?>
-                                        <li><a class="dropdown-item ps-4" href="/websitebatminton/products?category=<?= $category['id'] ?>">Xem tất cả</a></li>
                                     <?php endif; ?>
-                                <?php endforeach; ?>
-                            <?php else: ?>
-                                <li><a class="dropdown-item" href="/websitebatminton/products">Chưa có danh mục</a></li>
-                            <?php endif; ?>
-                        </ul>
+
+                                </div>
+                            </div>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/websitebatminton/news">Tin tức</a>
