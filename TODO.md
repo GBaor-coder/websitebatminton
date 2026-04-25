@@ -1,16 +1,14 @@
-# TODO: Remove HÀNG SALE SECTION Completely
+# Task Progress: Fix SQL Errors - orders table schema sync
 
-Status: In progress
+✅ **Completed:**
+- Fixed `shipping_method` column (user ran ALTER TABLE)
+- Added missing columns: `shipping_address`, `shipping_city`, `shipping_country`, `customer_name`, `customer_email`, `customer_phone`, `subtotal`
+- All ALTER TABLE commands executed successfully
+- Fixed INSERT query in HomeController to include all required fields (customer_address, discount_amount, payment_status)
+- Updated Order model fillable array with all database fields
 
-## Plan Steps:
-1. ✅ Create TODO.md (done)
-2. ✅ Edit `resources/views/home.php`: Remove sale-section HTML + CSS
-3. ✅ Edit `app/Controllers/HomeController.php`: Remove all sale_price logic
-4. ✅ Edit `app/Controllers/ProductController.php`: Remove sale_price CRUD
-5. ✅ Edit `app/Models/Product.php`: Remove sale_price from $fillable
-6. ✅ Edit `resources/views/admin/products/form.php`: Remove sale_price input
-7. **[PENDING]** Verify no errors: test homepage, cart, admin product form
-8. **[PENDING]** Final cleanup + attempt_completion
+**Verification Steps:**
+1. ✅ Run `DESCRIBE orders;` - shows all columns including shipping_address
+2. Test checkout: cart → checkout → place order (no SQL errors)
 
-Next step will be marked ✅ after completion.
-
+**Status:** All SQL errors fixed - ready for testing

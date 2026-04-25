@@ -9,7 +9,7 @@ require_once __DIR__ . '/Model.php';
 class Order extends Model {
     protected $table = 'orders';
     protected $primaryKey = 'id';
-    protected $fillable = ['user_id', 'order_number', 'total_amount', 'status', 'payment_method', 'payment_status', 'shipping_name', 'shipping_phone', 'shipping_address', 'notes'];
+    protected $fillable = ['user_id', 'order_number', 'customer_name', 'customer_email', 'customer_phone', 'customer_address', 'total_amount', 'shipping_fee', 'discount_amount', 'payment_method', 'payment_status', 'status', 'note', 'shipping_method', 'shipping_address', 'shipping_city', 'shipping_country', 'subtotal'];
     
     /**
      * Get orders with user info

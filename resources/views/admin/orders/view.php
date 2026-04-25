@@ -85,11 +85,11 @@
                         <table class="table table-borderless">
                             <tr>
                                 <td><strong>Tên khách hàng:</strong></td>
-                                <td><?php echo $order['shipping_name'] ?? $order['user_name']; ?></td>
+                                <td><?php echo $order['shipping_name'] ?? $order['customer_name']; ?></td>
                             </tr>
                             <tr>
                                 <td><strong>Điện thoại:</strong></td>
-                                <td><?php echo $order['shipping_phone'] ?? ''; ?></td>
+                                <td><?php echo $order['shipping_phone'] ?? $order['customer_phone']; ?></td>
                             </tr>
                             <tr>
                                 <td><strong>Địa chỉ:</strong></td>

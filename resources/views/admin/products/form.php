@@ -56,14 +56,17 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="price" class="form-label">Giá <span class="text-danger">*</span></label>
+                                <label for="price" class="form-label">Giá niêm yết <span class="text-danger">*</span></label>
                                 <input type="number" class="form-control" id="price" name="price" 
                                        value="<?php echo $product['price'] ?? ''; ?>" min="0" step="1000" required>
                             </div>
                         </div>
-
                     </div>
-                    
+                     <div class="mb-3">
+                        <label for="sale_price" class="form-label">Giá hiện tại </label>
+                        <input type="number" class="form-control" id="sale_price" name="sale_price" 
+                               value="<?php echo $product['sale_price'] ?? ''; ?>" min="0" step="1000">
+                    </div>
                     <div class="mb-3">
                         <label for="quantity" class="form-label">Số lượng <span class="text-danger">*</span></label>
                         <input type="number" class="form-control" id="quantity" name="quantity" 
@@ -107,7 +110,7 @@
                     <div class="mb-3 form-check">
                         <input type="checkbox" class="form-check-input" id="featured" name="featured" 
                                <?php echo ($product['featured'] ?? 0) == 1 ? 'checked' : ''; ?>>
-                        <label class="form-check-label" for="featured">Sản phẩm nổi bật</label>
+                        <label class="form-check-label" for="featured">Sản phẩm </label>
                     </div>
                 </div>
             </div>

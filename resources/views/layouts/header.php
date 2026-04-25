@@ -74,14 +74,19 @@
                                     <?php if ($session->isLoggedIn()): ?>
                                         <?php
                                             $profileUrl = '/websitebatminton/thanh-vien';
-                                            $profileLabel = 'Thành viên';
+                                            $profileLabel = 'Tài khoản';
+                                            $isAdmin = false;
                                             if (($session->user()['role'] ?? 'customer') === 'admin') {
                                                 $profileUrl = '/websitebatminton/admin';
                                                 $profileLabel = 'Admin';
+                                                $isAdmin = true;
                                             }
                                         ?>
                                         <ul class="dropdown-menu dropdown-menu-end">
                                             <li><a class="dropdown-item" href="<?= $profileUrl ?>"><?= $profileLabel ?></a></li>
+                                            <?php if ($isAdmin): ?>
+                                                <li><a class="dropdown-item" href="/websitebatminton/admin/dashboard">Dashboard</a></li>
+                                            <?php endif; ?>
                                             <li><hr class="dropdown-divider"></li>
                                             <li><a class="dropdown-item" href="/websitebatminton/logout">Đăng xuất</a></li>
                                         </ul>

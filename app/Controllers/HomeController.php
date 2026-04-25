@@ -985,26 +985,29 @@ class HomeController {
             $orderNumber = 'ORD-' . date('Ymd') . '-' . uniqid();
 
             // Insert order
-            $query = "INSERT INTO orders (user_id, order_number, total_amount, shipping_method, 
-                      shipping_fee, payment_method, status, shipping_address, shipping_city, 
-                      shipping_country, customer_name, customer_email, customer_phone, subtotal, 
-                      created_at, updated_at) 
-                      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            $query = "INSERT INTO orders (user_id, order_number, customer_name, customer_email, 
+                      customer_phone, customer_address, total_amount, shipping_fee, discount_amount, 
+                      payment_method, payment_status, status, shipping_method, shipping_address, 
+                      shipping_city, shipping_country, subtotal, created_at, updated_at) 
+                      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             $params = [
                 $userId,
                 $orderNumber,
-                $totalAmount,
-                $shipping,
-                $shippingFee,
-                $data['payment'] ?? 'cod',
-                'pending',
-                $data['address'],
-                $data['city'],
-                $data['country'] ?? 'Vietnam',
                 $data['first_name'] . ' ' . $data['last_name'],
                 $data['email'],
                 $data['phone'],
+                $data['address'], // customer_address
+                $totalAmount,
+                $shippingFee,
+                0, // discount_amount
+                $data['payment'] ?? 'cod',
+                'pending', // payment_status
+                'pending', // status
+                $shipping,
+                $data['address'], // shipping_address
+                $data['city'],
+                $data['country'] ?? 'Vietnam',
                 $subtotal,
                 date('Y-m-d H:i:s'),
                 date('Y-m-d H:i:s')
