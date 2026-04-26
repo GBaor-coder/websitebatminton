@@ -86,6 +86,9 @@
                     <a href="/websitebatminton/admin/posts" class="<?php echo strpos($_SERVER['REQUEST_URI'], 'posts') !== false ? 'active' : ''; ?>">
                         <i class="fas fa-newspaper"></i> Bài viết
                     </a>
+                    <a href="/websitebatminton/admin/guides" class="<?php echo strpos($_SERVER['REQUEST_URI'], 'guides') !== false || strpos($_SERVER['REQUEST_URI'], 'guide-categor') !== false ? 'active' : ''; ?>">
+                        <i class="fas fa-book"></i> Hướng dẫn
+                    </a>
                     <a href="/websitebatminton/admin/contacts/messenger" class="<?php echo strpos($_SERVER['REQUEST_URI'], 'contacts') !== false || strpos($_SERVER['REQUEST_URI'], 'messenger') !== false ? 'active' : ''; ?>">
                         <i class="fas fa-envelope"></i> Tin nhắn
                     </a>

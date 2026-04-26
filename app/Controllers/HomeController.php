@@ -8,6 +8,7 @@ require_once ROOT_PATH . '/app/Models/Product.php';
 require_once ROOT_PATH . '/app/Models/Category.php';
 require_once ROOT_PATH . '/app/Models/Post.php';
 require_once ROOT_PATH . '/app/Models/User.php';
+require_once ROOT_PATH . '/app/Models/Guide.php';
 
 class HomeController {
     private $productModel;
@@ -16,7 +17,8 @@ class HomeController {
     private $userModel;
     private $params = [];
     private $menu = [];
-    
+    private $guideModel;
+    private $guideMenu = [];
     private $rememberSecret = 'jpsport_remember_secret_2026';
 
     public function __construct($params = []) {
@@ -24,11 +26,11 @@ class HomeController {
         $this->categoryModel = new Category();
         $this->postModel = new Post();
         $this->userModel = new User();
+        $this->guideModel = new Guide();
         $this->params = $params;
         $this->autoLoginFromCookie();
-
-        // Load dynamic menu from database for all public views
         $this->menu = $this->categoryModel->getCategoriesWithBrands();
+        $this->guideMenu = $this->guideModel->getCategoriesWithItems();
     }
 
     /**
@@ -89,6 +91,7 @@ class HomeController {
     private function view($view, $data = []) {
         // Always pass menu data to the view so header can render dynamic categories and brands
         $data['menu'] = $this->menu;
+        $data['guideMenu'] = $this->guideMenu;
         extract($data);
         
         $viewFile = ROOT_PATH . '/resources/views/' . $view . '.php';
@@ -1114,7 +1117,27 @@ class HomeController {
      * Guide - Guide/How-to page
      */
     public function guide() {
-        $this->view('guide');
+        $itemId = $_GET['item'] ?? null;
+        $categoryId = $_GET['category'] ?? null;
+        
+        if ($itemId) {
+            // Show specific guide content detail
+            $guide = $this->guideModel->getById($itemId);
+            $data = ['guide' => $guide];
+        } elseif ($categoryId) {
+            // Direct to first content of the category (no sub-menu display)
+            $guide = $this->guideModel->getFirstContentByCategory($categoryId);
+            $data = ['guide' => $guide];
+        } else {
+            // Show all categories (no items, just category names)
+            $categories = $this->guideModel->getCategories();
+            $data = ['categories' => $categories];
+        }
+        
+        $this->view('guide', $data);
     }
+
 }
+
+
 

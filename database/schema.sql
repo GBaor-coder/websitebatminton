@@ -185,3 +185,43 @@ INSERT INTO settings (setting_key, setting_value) VALUES
 ('shipping_fee', '30000'),
 ('free_shipping', '500000')
 ON DUPLICATE KEY UPDATE setting_value = VALUES(setting_value);
+
+-- Guide Categories Table
+CREATE TABLE IF NOT EXISTS guide_categories (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Guide Contents Table
+CREATE TABLE IF NOT EXISTS guide_contents (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    category_id INT NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    slug VARCHAR(255) UNIQUE NOT NULL,
+    content TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (category_id) REFERENCES guide_categories(id) ON DELETE CASCADE,
+    INDEX idx_category (category_id),
+    INDEX idx_slug (slug)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Insert sample guide categories
+INSERT INTO guide_categories (name, description) VALUES
+('Hướng dẫn mua hàng', 'Các bước hướng dẫn mua hàng trên website'),
+('Hướng dẫn thanh toán', 'Thông tin về các phương thức thanh toán'),
+('Chính sách vận chuyển', 'Quy định về giao hàng và vận chuyển'),
+('Chính sách đổi trả', 'Quy định về đổi trả sản phẩm')
+ON DUPLICATE KEY UPDATE name = VALUES(name);
+
+-- Insert sample guide contents
+INSERT INTO guide_contents (category_id, title, slug, content) VALUES
+(1, 'Cách đặt hàng trên website', 'cach-dat-hang-tren-website', '<p>Để đặt hàng trên website JP Sport, bạn thực hiện các bước sau:</p><ol><li>Chọn sản phẩm cần mua</li><li>Thêm vào giỏ hàng</li><li>Vào giỏ hàng và tiến hành thanh toán</li><li>Điền thông tin giao hàng</li><li>Chọn phương thức thanh toán</li><li>Xác nhận đơn hàng</li></ol>'),
+(1, 'Hướng dẫn chọn size vợt cầu lông', 'huong-dan-chon-size-vot-cau-long', '<p>Việc chọn vợt cầu lông phù hợp rất quan trọng. Bạn cần xem xét trọng lượng vợt, điểm cân bằng, độ cứng thân vợt và lực căng dây.</p>'),
+(2, 'Các phương thức thanh toán', 'cac-phuong-thuc-thanh-toan', '<p>JP Sport hỗ trợ các phương thức thanh toán: COD (thanh toán khi nhận hàng), chuyển khoản ngân hàng, ví MoMo và thẻ tín dụng.</p>'),
+(3, 'Thờigian giao hàng', 'thoi-gian-giao-hang', '<p>Thờigian giao hàng dự kiến từ 2-5 ngày làm việc tùy khu vực. Đơn hàng nội thành HCM thường giao trong 1-2 ngày.</p>'),
+(4, 'Quy định đổi trả trong 7 ngày', 'quy-dinh-doi-tra-trong-7-ngay', '<p>Sản phẩm được đổi trả trong vòng 7 ngày kể từ ngày nhận hàng. Sản phẩm phải còn nguyên tem mác, chưa qua sử dụng và có hóa đơn mua hàng.</p>')
+ON DUPLICATE KEY UPDATE title = VALUES(title);

@@ -182,8 +182,23 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/websitebatminton/news">Tin tức</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/websitebatminton/guide">Hướng dẫn</a>
+                   <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="/websitebatminton/guide" id="guideDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Hướng dẫn
+                        </a>
+                        <div class="dropdown-menu mt-0 p-3 border-0 shadow">
+                            <?php if (!empty($guideMenu)): ?>
+                                <?php foreach ($guideMenu as $category): ?>
+                                    <a class="dropdown-item px-0 py-1 fw-bold text-primary"
+                                       href="/websitebatminton/guide?category=<?= $category['id'] ?>">
+                                        <?= htmlspecialchars($category['name']) ?>
+                                    </a>
+                                    <hr class="my-2">
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <span class="text-muted">Chưa có dữ liệu hướng dẫn</span>
+                            <?php endif; ?>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/websitebatminton/about">Giới thiệu</a>

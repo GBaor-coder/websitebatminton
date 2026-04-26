@@ -161,5 +161,20 @@ $router->post('admin/users/status', ['controller' => 'User', 'action' => 'status
 $router->get('admin/contacts', ['controller' => 'Contact', 'action' => 'index']);
 $router->get('admin/contacts/messenger', ['controller' => 'Contact', 'action' => 'messenger']);
 
+// Admin Guide routes
+$router->get('admin/guides', ['controller' => 'Guide', 'action' => 'index']);
+$router->get('admin/guides/create', ['controller' => 'Guide', 'action' => 'create']);
+$router->post('admin/guides/store', ['controller' => 'Guide', 'action' => 'store']);
+$router->get('admin/guides/edit', ['controller' => 'Guide', 'action' => 'edit']);
+$router->post('admin/guides/update', ['controller' => 'Guide', 'action' => 'update']);
+$router->post('admin/guides/delete', ['controller' => 'Guide', 'action' => 'delete']);
+
+$router->get('admin/guide-categories', ['controller' => 'Guide', 'action' => 'categories']);
+$router->get('admin/guide-categories/create', ['controller' => 'Guide', 'action' => 'createCategory']);
+$router->post('admin/guide-categories/store', ['controller' => 'Guide', 'action' => 'storeCategory']);
+$router->get('admin/guide-categories/edit', ['controller' => 'Guide', 'action' => 'editCategory']);
+$router->post('admin/guide-categories/update', ['controller' => 'Guide', 'action' => 'updateCategory']);
+$router->post('admin/guide-categories/delete', ['controller' => 'Guide', 'action' => 'deleteCategory']);
+
 // Dispatch route
 $router->dispatch($url);
