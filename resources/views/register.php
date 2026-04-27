@@ -10,12 +10,8 @@
 
         <form method="POST" action="/websitebatminton/register">
             <div class="mb-3">
-                <label class="form-label">Họ</label>
-                <input type="text" name="first_name" class="form-control" placeholder="Họ" required>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Tên</label>
-                <input type="text" name="last_name" class="form-control" placeholder="Tên" required>
+                <label class="form-label">Họ và tên</label>
+                <input type="text" name="name" class="form-control" placeholder="Họ và tên" required>
             </div>
             <div class="mb-3">
                 <label class="form-label">Email</label>
@@ -30,8 +26,8 @@
                 <input type="password" name="password" class="form-control" placeholder="Mật khẩu" required>
             </div>
             <div class="mb-3">
-                <label class="form-label">Xác nhận mật khẩu</label>
-                <input type="password" name="password_confirm" class="form-control" placeholder="Xác nhận mật khẩu" required>
+                <label class="form-label">Nhập lại mật khẩu</label>
+                <input type="password" name="password_confirm" class="form-control" placeholder="Nhập lại mật khẩu" required>
             </div>
             <button class="btn btn-primary" type="submit">ĐĂNG KÝ</button>
         </form>

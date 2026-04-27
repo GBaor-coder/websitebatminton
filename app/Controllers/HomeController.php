@@ -733,15 +733,13 @@ class HomeController {
             return;
         }
 
-        $firstName = trim($_POST['first_name'] ?? '');
-        $lastName = trim($_POST['last_name'] ?? '');
-        $name = trim($firstName . ' ' . $lastName);
+        $name = trim($_POST['name'] ?? '');
         $email = trim($_POST['email'] ?? '');
         $phone = trim($_POST['phone'] ?? '');
         $password = $_POST['password'] ?? '';
         $confirm = $_POST['password_confirm'] ?? '';
 
-        if (empty($firstName) || empty($lastName) || empty($email) || empty($phone) || empty($password)) {
+        if (empty($name) || empty($email) || empty($phone) || empty($password)) {
             $_SESSION['error'] = 'Vui lòng điền đầy đủ thông tin';
             $this->redirect('/websitebatminton/register');
             return;
