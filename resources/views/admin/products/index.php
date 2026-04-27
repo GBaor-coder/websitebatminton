@@ -47,7 +47,7 @@
                         <th>Hình ảnh</th>
                         <th>Tên sản phẩm</th>
                         <th>Danh mục</th>
-                        <th>Giá</th>
+                        <th>Giá Niêm Yết</th>
                         <th>Giá KM</th>
                         <th>Tồn kho</th>
                         <th>Trạng thái</th>

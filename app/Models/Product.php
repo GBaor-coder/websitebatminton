@@ -9,7 +9,7 @@ require_once __DIR__ . '/Model.php';
 class Product extends Model {
     protected $table = 'products';
     protected $primaryKey = 'id';
-    protected $fillable = ['name', 'slug', 'category_id', 'brand_id', 'description', 'content', 'price', 'quantity', 'sku', 'image', 'images', 'featured', 'status', 'views'];
+    protected $fillable = ['name', 'slug', 'category_id', 'brand_id', 'description', 'content', 'price','sale_price', 'quantity', 'sku', 'image', 'images', 'featured', 'status', 'views'];
     
     /**
      * Get all active products
