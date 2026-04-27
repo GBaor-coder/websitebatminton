@@ -136,9 +136,9 @@
                                             <span><?php echo $item['product_name']; ?></span>
                                         </div>
                                     </td>
-                                    <td><?php echo number_format($item['price'], 0, ',', '.'); ?> đ</td>
+                                    <td><?php echo number_format($item['price'] ?? $item['product_price'] ?? 0, 0, ',', '.'); ?> đ</td>
                                     <td><?php echo $item['quantity']; ?></td>
-                                    <td><strong><?php echo number_format($item['total'], 0, ',', '.'); ?> đ</strong></td>
+                                    <td><strong><?php echo number_format($item['total'] ?? $item['subtotal'] ?? 0, 0, ',', '.'); ?> đ</strong></td>
                                 </tr>
                                 <?php endforeach; ?>
                             <?php else: ?>
@@ -148,6 +148,22 @@
                             <?php endif; ?>
                         </tbody>
                         <tfoot>
+                            <tr>
+                                <td colspan="3" class="text-end"><strong>Tạm tính:</strong></td>
+                                <td><strong><?php echo number_format($order['subtotal'] ?? 0, 0, ',', '.'); ?> đ</strong></td>
+                            </tr>
+                            <?php if (!empty($order['shipping_fee']) && $order['shipping_fee'] > 0): ?>
+                            <tr>
+                                <td colspan="3" class="text-end"><strong>Phí vận chuyển:</strong></td>
+                                <td><strong><?php echo number_format($order['shipping_fee'], 0, ',', '.'); ?> đ</strong></td>
+                            </tr>
+                            <?php endif; ?>
+                            <?php if (!empty($order['discount_amount']) && $order['discount_amount'] > 0): ?>
+                            <tr>
+                                <td colspan="3" class="text-end"><strong>Giảm giá:</strong></td>
+                                <td><strong class="text-success">-<?php echo number_format($order['discount_amount'], 0, ',', '.'); ?> đ</strong></td>
+                            </tr>
+                            <?php endif; ?>
                             <tr>
                                 <td colspan="3" class="text-end"><strong>Tổng cộng:</strong></td>
                                 <td><strong class="text-danger h5"><?php echo number_format($order['total_amount'], 0, ',', '.'); ?> đ</strong></td>
