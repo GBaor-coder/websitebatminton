@@ -5,8 +5,6 @@
     <div class="row">
         <!-- Order Summary -->
         <div class="col-lg-8 mb-4">
-            <h2 class="mb-4">THANH TOÁN ĐƠN HÀNG</h2>
-
             <!-- Billing Information -->
             <div class="card mb-4">
                 <div class="card-header bg-light">
@@ -14,17 +12,10 @@
                 </div>
                 <div class="card-body">
                     <form id="checkoutForm">
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <label class="form-label">Họ <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="first_name" 
-                                       value="<?php echo htmlspecialchars($user['first_name'] ?? ''); ?>" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Tên <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="last_name" 
-                                       value="<?php echo htmlspecialchars($user['last_name'] ?? ''); ?>" required>
-                            </div>
+                        <div class="mb-3">
+                            <label class="form-label">Họ và tên <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="name" 
+                                   value="<?php echo htmlspecialchars($user['name'] ?? ''); ?>" required>
                         </div>
 
                         <div class="mb-3">
@@ -118,8 +109,8 @@
         </div>
 
         <!-- Order Summary Sidebar -->
-        <div class="col-lg-4">
-            <div class="card sticky-top" style="top: 20px;">
+        <div class="col-lg-4 mb-4">
+            <div class="card">
                 <div class="card-header bg-light">
                     <h5 class="mb-0">ĐƠN HÀNG CỦA BẠN</h5>
                 </div>
@@ -209,8 +200,7 @@
         
         const formData = new FormData(this);
         const data = {
-            first_name: formData.get('first_name'),
-            last_name: formData.get('last_name'),
+            name: formData.get('name'),
             email: formData.get('email'),
             phone: formData.get('phone'),
             address: formData.get('address'),
@@ -221,7 +211,7 @@
         };
 
         // Validate form
-        if (!data.first_name || !data.last_name || !data.email || !data.phone || 
+        if (!data.name || !data.email || !data.phone || 
             !data.address || !data.city || !data.country) {
             alert('Vui lòng điền đầy đủ thông tin');
             return;
@@ -253,5 +243,4 @@
         });
     });
 </script>
-
 <?php include isset($layout) ? '' : ROOT_PATH . '/resources/views/layouts/footer.php'; ?>
